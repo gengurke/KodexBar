@@ -1,0 +1,28 @@
+# Plasma / Qt
+*.qmlc
+*.jsc
+
+# IDEs
+.vscode/
+.idea/
+*.kate-swp
+*.kdev4
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Build artifacts
+build/
+
+# Local dev
+*.swp
+*.swo
+*~
+
+# Node / Python (if used later)
+node_modules/
+__pycache__/

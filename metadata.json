@@ -1,0 +1,16 @@
+{
+  "KPackageStructure": "Plasma/Applet",
+  "KPlugin": {
+    "Id": "com.kodexbar",
+    "Name": "KodexBar",
+    "Description": "Shows Codex usage provided by codexbar CLI",
+    "Version": "0.1.0",
+    "License": "MIT",
+    "Authors": [
+      {
+        "Name": "Florian Klamer"
+      }
+    ]
+  },
+  "X-Plasma-API-Minimum-Version": "6.0"
+}
