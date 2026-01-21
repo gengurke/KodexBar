@@ -18,8 +18,6 @@ PlasmoidItem {
             onTriggered: root.refreshNow()
         }
     ]
-    Layout.minimumWidth: compactRoot.implicitWidth
-    Layout.preferredWidth: compactRoot.implicitWidth
 
     property string command: Plasmoid.configuration.command || "codexbar usage --status --provider codex --source cli"
     property int refreshIntervalSec: Math.max(10, Plasmoid.configuration.refreshInterval || 60)
@@ -31,7 +29,7 @@ PlasmoidItem {
     property int weeklyPercent: -1
     property string lastUpdatedText: ""
     property double lastUpdatedAt: 0
-    property int compactWidth: Math.max(PlasmaCore.Units.gridUnit * 6, sessionText.implicitWidth + PlasmaCore.Units.gridUnit * 2)
+    property int compactWidth: Math.max(Kirigami.Units.gridUnit * 6, sessionText.implicitWidth + Kirigami.Units.gridUnit * 2)
     onRefreshIntervalSecChanged: usageSource.interval = root.refreshIntervalSec * 1000
 
     function parseOutput(stdoutText, stderrText) {
@@ -177,9 +175,9 @@ PlasmoidItem {
         connectedSources: [root.command]
         interval: root.refreshIntervalSec * 1000
 
-        onNewData: {
-            var stdoutText = data["stdout"] ? data["stdout"] : ""
-            var stderrText = data["stderr"] ? data["stderr"] : ""
+        onNewData: function (sourceName, data) {
+            var stdoutText = data && data["stdout"] ? data["stdout"] : ""
+            var stderrText = data && data["stderr"] ? data["stderr"] : ""
             root.parseOutput(stdoutText, stderrText)
         }
     }
@@ -188,10 +186,10 @@ PlasmoidItem {
         id: compactRoot
         clip: true
         implicitWidth: root.compactWidth
-        implicitHeight: PlasmaCore.Units.gridUnit * 2
+        implicitHeight: Kirigami.Units.gridUnit * 2
         Layout.minimumWidth: root.compactWidth
         Layout.preferredWidth: root.compactWidth
-        Layout.minimumHeight: PlasmaCore.Units.gridUnit * 2
+        Layout.minimumHeight: Kirigami.Units.gridUnit * 2
 
         MouseArea {
             anchors.fill: parent
@@ -200,7 +198,7 @@ PlasmoidItem {
 
         RowLayout {
             anchors.fill: parent
-            spacing: PlasmaCore.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
 
             Text {
                 id: sessionText
@@ -217,23 +215,23 @@ PlasmoidItem {
 
     fullRepresentation: Item {
         id: fullRoot
-        implicitWidth: PlasmaCore.Units.gridUnit * 22
-        implicitHeight: contentLayout.implicitHeight + PlasmaCore.Units.gridUnit
+        implicitWidth: Kirigami.Units.gridUnit * 22
+        implicitHeight: contentLayout.implicitHeight + Kirigami.Units.gridUnit
 
         ColumnLayout {
             id: contentLayout
             anchors.fill: parent
-            anchors.margins: PlasmaCore.Units.smallSpacing
-            spacing: PlasmaCore.Units.smallSpacing
+            anchors.margins: Kirigami.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
 
             RowLayout {
                 Layout.fillWidth: true
-                spacing: PlasmaCore.Units.smallSpacing
+                spacing: Kirigami.Units.smallSpacing
 
                 Kirigami.Icon {
                     source: "view-statistics"
-                    Layout.preferredWidth: PlasmaCore.Units.iconSizes.medium
-                    Layout.preferredHeight: PlasmaCore.Units.iconSizes.medium
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.medium
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.medium
                 }
 
                 ColumnLayout {
@@ -293,11 +291,11 @@ PlasmoidItem {
 
                 ColumnLayout {
                     Layout.fillWidth: true
-                    spacing: PlasmaCore.Units.smallSpacing
+                    spacing: Kirigami.Units.smallSpacing
 
                     RowLayout {
                         Layout.fillWidth: true
-                        spacing: PlasmaCore.Units.smallSpacing
+                        spacing: Kirigami.Units.smallSpacing
 
                         PlasmaComponents.Label {
                             text: modelData.label
@@ -325,7 +323,7 @@ PlasmoidItem {
                     RowLayout {
                         visible: modelData.percent !== null || (modelData.reset && modelData.reset.length > 0)
                         Layout.fillWidth: true
-                        spacing: PlasmaCore.Units.smallSpacing
+                        spacing: Kirigami.Units.smallSpacing
 
                         PlasmaComponents.Label {
                             text: modelData.percent !== null ? (modelData.percent.toFixed(0) + "% left") : ""
@@ -356,7 +354,7 @@ PlasmoidItem {
             PlasmaComponents.Label {
                 visible: errorText.length > 0
                 text: errorText
-                color: PlasmaCore.ColorScope.negativeTextColor
+                color: Kirigami.Theme.negativeTextColor
                 Layout.fillWidth: true
                 wrapMode: Text.Wrap
             }

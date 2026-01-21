@@ -6,6 +6,8 @@ import org.kde.kcmutils as KCM
 KCM.SimpleKCM {
     property alias cfg_command: commandField.text
     property alias cfg_refreshInterval: refreshIntervalSpin.value
+    property string cfg_commandDefault
+    property int cfg_refreshIntervalDefault
 
     Kirigami.FormLayout {
         QQC2.TextField {
